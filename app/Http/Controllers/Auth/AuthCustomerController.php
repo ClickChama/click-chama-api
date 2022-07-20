@@ -16,6 +16,8 @@ class AuthCustomerController extends Controller
 {
     public function login(Request $request)
     {
+        \Log::info($request->header());
+        \Log::info($request->all());
         $update_token['login_token'] = Str::random(100);
         $update_token['expires_in_login_token'] = date('Y-m-d H:i:s', strtotime('+1 Years'));
 
