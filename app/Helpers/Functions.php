@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Seller;
 use App\Models\Customer;
 use App\Models\GeneralTable;
 use Illuminate\Support\Facades\Crypt;
@@ -14,6 +15,19 @@ if(!function_exists('getCustomer')){
         }
 
         return $customer ?? null;
+    }
+}
+
+if(!function_exists('getSeller')){
+    function getSeller(){
+        if(\Str::contains(\Request::header()['authorization'][0], 'Bearer')){
+            $authorization = explode(' ', \Request::header()['authorization'][0])[1];
+            $authorization = json_decode(Crypt::decryptString($authorization), true);
+
+            $seller = Seller::with('info')->where('email', ($authorization[0]??null))->where('login_token', ($authorization[1]??null))->where('expires_in_login_token', '>=', date('Y-m-d H:i:s'))->first();
+        }
+
+        return $seller ?? null;
     }
 }
 

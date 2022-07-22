@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Auth\AuthSellerController;
 use App\Http\Controllers\Auth\AuthCustomerController;
 
 /*
@@ -19,7 +21,20 @@ use App\Http\Controllers\Auth\AuthCustomerController;
 //     return $request->user();
 // });
 
+Route::middleware(['auth.seller.token'])->prefix('seller')->group(function(){
+    Route::get('product', [ProductController::class, 'show'])->name('product');
+    Route::post('product', [ProductController::class, 'create'])->name('product');
+    Route::put('product', [ProductController::class, 'update'])->name('product');
+    Route::delete('product', [ProductController::class, 'delete'])->name('product');
+});
+
 ################ROTAS DE LOGIN E REGISTRO################
+########ROTAS DO VENDEDOR########
+Route::post('auth/seller/login', [AuthSellerController::class, 'login'])->name('auth.seller.login');
+Route::post('auth/seller/register', [AuthSellerController::class, 'register'])->name('auth.seller.register');
+Route::middleware(['auth.seller.token'])->put('auth/seller/update', [AuthSellerController::class, 'update'])->name('auth.seller.update');
+Route::middleware(['auth.seller.token'])->get('auth/seller/info', [AuthSellerController::class, 'infoSeller'])->name('auth.seller.info');
+################################
 ########ROTAS DO CLIENTE########
 Route::post('auth/customer/login', [AuthCustomerController::class, 'login'])->name('auth.customer.login');
 Route::post('auth/customer/register', [AuthCustomerController::class, 'register'])->name('auth.customer.register');
