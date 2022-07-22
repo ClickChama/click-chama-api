@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('password');
             $table->text('login_token')->nullable();
             $table->dateTime('expires_in_login_token')->nullable();
+            $table->char('service_active', 1)->nullable('N');
             $table->timestamps();
         });
     }

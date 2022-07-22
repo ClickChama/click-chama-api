@@ -25,6 +25,7 @@ class Seller extends Authenticatable
         'password',
         'login_token',
         'expires_in_login_token',
+        'service_active',
     ];
 
     /**
