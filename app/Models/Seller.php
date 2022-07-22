@@ -52,4 +52,9 @@ class Seller extends Authenticatable
     {
         return $this->hasOne(SellerInfo::class);
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

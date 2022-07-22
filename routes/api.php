@@ -28,6 +28,8 @@ Route::middleware(['auth.seller.token'])->prefix('seller')->group(function(){
     Route::delete('product', [ProductController::class, 'delete'])->name('product');
 });
 
+Route::get('get-seller-products', [ProductController::class, 'getSellerProducts'])->name('getSellerProductspt');
+
 ################ROTAS DE LOGIN E REGISTRO################
 ########ROTAS DO VENDEDOR########
 Route::post('auth/seller/login', [AuthSellerController::class, 'login'])->name('auth.seller.login');

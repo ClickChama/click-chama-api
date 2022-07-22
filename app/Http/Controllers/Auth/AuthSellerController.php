@@ -78,8 +78,6 @@ class AuthSellerController extends Controller
         $dataInfo['delivery_time'] = $request->delivery_time;
         $dataInfo['lat'] = $request->lat;
         $dataInfo['lng'] = $request->lng;
-        $dataInfo['delivery_radius'] = $request->delivery_radius;
-        $dataInfo['delivery_time'] = $request->delivery_time;
         if(SellerInfo::where('seller_id', getSeller()->id)->get()->count() > 0){
             SellerInfo::where('seller_id', getSeller()->id)->update($dataInfo);
         }else{
