@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\AuthSellerController;
 use App\Http\Controllers\Auth\AuthCustomerController;
@@ -26,6 +27,14 @@ Route::middleware(['auth.seller.token'])->prefix('seller')->group(function(){
     Route::post('product', [ProductController::class, 'create'])->name('product');
     Route::put('product', [ProductController::class, 'update'])->name('product');
     Route::delete('product', [ProductController::class, 'delete'])->name('product');
+
+    Route::get('order/{id?}', [OrderController::class, 'show'])->name('order');
+    Route::post('order', [OrderController::class, 'create'])->name('order');
+});
+
+Route::middleware(['auth.customer.token'])->prefix('customer')->group(function(){
+    Route::get('order/{id?}', [OrderController::class, 'show'])->name('customer.order');
+    Route::post('order', [OrderController::class, 'create'])->name('customer.order');
 });
 
 Route::get('get-seller-products', [ProductController::class, 'getSellerProducts'])->name('getSellerProducts');
