@@ -26,12 +26,17 @@ class ProductController extends Controller
 
     public function update(Request $request)
     {
-        # code...
+        $dataProduct = collect($request->all())->forget(['seller_id', 'id']);
+        $product = Product::find($request->id)->update($dataProduct->toArray());
+
+        return response()->json($product);
     }
 
     public function delete(Request $request)
     {
-        # code...
+        $product = Product::whereIn('id', ($request->products_id ?? []))->delete();
+
+        return response()->json('Apagado!');
     }
 
     public function getSellerProducts(Request $request)

@@ -22,13 +22,13 @@ use App\Http\Controllers\Auth\AuthCustomerController;
 // });
 
 Route::middleware(['auth.seller.token'])->prefix('seller')->group(function(){
-    Route::get('product', [ProductController::class, 'show'])->name('product');
+    Route::get('product/{id?}', [ProductController::class, 'show'])->name('product');
     Route::post('product', [ProductController::class, 'create'])->name('product');
     Route::put('product', [ProductController::class, 'update'])->name('product');
     Route::delete('product', [ProductController::class, 'delete'])->name('product');
 });
 
-Route::get('get-seller-products', [ProductController::class, 'getSellerProducts'])->name('getSellerProductspt');
+Route::get('get-seller-products', [ProductController::class, 'getSellerProducts'])->name('getSellerProducts');
 
 ################ROTAS DE LOGIN E REGISTRO################
 ########ROTAS DO VENDEDOR########

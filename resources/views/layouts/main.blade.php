@@ -83,7 +83,7 @@
                                     <td>${data.data[i].brand}</td>
                                     <td>${data.data[i].type}</td>
                                     <td>${data.data[i].price}</td>
-                                    <td><div class="btn-group" role="group"><button class="btn btn-info" type="button" data-id="${data.data[i].id}" data-bs-target="#editar-produto" data-bs-toggle="modal">Editar</button><button class="btn btn-danger btn-apagar" data-id="${data.data[i].id}" type="button">Apagar</button></div></td>
+                                    <td><div class="btn-group" role="group"><button class="btn btn-info" type="button" data-id="${data.data[i].id}" data-bs-target="#editar-produto" data-bs-toggle="modal">Editar</button><button class="btn btn-danger btn-apagar-product" data-id="${data.data[i].id}" type="button">Apagar</button></div></td>
                                 </tr>
                             `);
                             console.log(data.data[i]);
@@ -91,6 +91,36 @@
                     }
                 });
             });
+
+            $(document).on('click', '[data-bs-target="#editar-produto"]', function(){
+                $.ajax({
+                    url: `{{route('product')}}/${$(this).data('id')}`,
+                    headers: {
+                        'Authorization': 'Bearer '+localStorage.getItem('session'),
+                    },
+                    type: 'GET',
+                    success: (data) => {
+                        for(i in data){
+                            $('#editar-produto').find(`[name="${i}"]`).val(data[i]);
+                        }
+                    }
+                });
+            });
+
+            $(document).on('click', '.btn-apagar-product', function(){
+                $.ajax({
+                    url: `{{route('product')}}`,
+                    headers: {
+                        'Authorization': 'Bearer '+localStorage.getItem('session'),
+                    },
+                    type: 'DELETE',
+                    data: {products_id: [$(this).data('id')]},
+                    success: (data) => {
+                        window.location.reload();
+                    }
+                });
+            });
+
             $(document).on('click', '.btn-send', function(){
                 var btn = $(this);
                 var btn_text = btn.html();

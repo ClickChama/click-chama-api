@@ -18,16 +18,7 @@
                                 <th>Ações</th>
                             </tr>
                         </thead>
-                        <tbody class="table-produto">
-                            <tr>
-                                <td>Ultragas</td>
-                                <td>GAPP13</td>
-                                <td>115,99</td>
-                                <td>
-                                    <div class="btn-group" role="group"><button class="btn btn-info" type="button" data-bs-target="#editar-produto" data-bs-toggle="modal">Editar</button><button class="btn btn-danger" type="button">Apagar</button></div>
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tbody class="table-produto"></tbody>
                     </table>
                 </div>
             </div>
@@ -41,7 +32,7 @@
                     <h4 class="modal-title">Editar Produto</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="{{route('product')}}" method="PUT">
-                    <input type="text" name="id">
+                    <input type="hidden" name="id">
                     <div class="modal-body">
                         <div class="modal-body">
                             <div class="container">
@@ -77,7 +68,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Fechar</button><button class="btn btn-primary btn-send" type="button">Salvar Alteração</button></div>
+                    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Fechar</button><button class="btn btn-primary btn-send" type="button">Salvar</button></div>
                 </form>
             </div>
         </div>
