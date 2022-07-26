@@ -10,8 +10,8 @@ class ProductController extends Controller
 {
     public function show(Request $request, $id = null)
     {
-        if($id) $products = Product::find($id);
-        if(!$id) $products = Product::paginate($per_page ?? 20);
+        if ($id) $products = Product::find($id);
+        if (!$id) $products = Product::paginate($per_page ?? 20);
 
         return response()->json($products);
     }
@@ -44,5 +44,10 @@ class ProductController extends Controller
         $seller_products = Seller::with('products', 'info')->get()->makeHidden(['email', 'created_at', 'updated_at', 'email_verified_at', 'phone_verified_at']);
 
         return response()->json($seller_products);
+    }
+    public function getProductsBySeller($id)
+    {
+        $product = Product::where('seller_id', $id)->get();
+        return response()->json($product);
     }
 }

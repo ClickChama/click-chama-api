@@ -38,6 +38,7 @@ Route::middleware(['auth.customer.token'])->prefix('customer')->group(function()
 });
 
 Route::get('get-seller-products', [ProductController::class, 'getSellerProducts'])->name('getSellerProducts');
+Route::get('get-all-products/{id}', [ProductController::class, 'getProductsBySeller'])->name('getProductsBySeller');
 
 ################ROTAS DE LOGIN E REGISTRO################
 ########ROTAS DO VENDEDOR########
