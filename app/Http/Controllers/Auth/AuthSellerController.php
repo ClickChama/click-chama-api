@@ -41,7 +41,7 @@ class AuthSellerController extends Controller
         if(isset($request->name) && !empty($request->name)) $seller_create['name'] = Str::title($request->name);
         $seller_create['email'] = Str::of($request->email)->lower()->trim();
         $seller_create['password'] = Hash::make($request->password);
-        $seller_create['phone'] = $request->phone ?? '0';
+        $seller_create['phone'] = $request->phone ?? Str::random(10);
         $seller_create['login_token'] = Str::random(100);
         $seller_create['expires_in_login_token'] = date('Y-m-d H:i:s', strtotime('+1 Years'));
 
