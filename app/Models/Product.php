@@ -15,5 +15,6 @@ class Product extends Model
         'brand',
         'type',
         'price',
+        'product_type'
     ];
 }

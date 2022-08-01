@@ -45,6 +45,7 @@
 
     <script>
         $(document).ready(function(){
+            var type;
             $(function(){
                 if(!localStorage.getItem('session')) window.location.href = '/login';
 
@@ -78,8 +79,15 @@
                         // console.log(data);
                         $('.table-produto').empty();
                         for(i in data.data){
+                            if(data.data[i].product_type == 1)
+                            {
+                                type = 'Gás';
+                            }else if(data.data[i].product_type == 2){
+                                type = 'Aguá';
+                            }
                             $('.table-produto').append(`
                                 <tr>
+                                    <td>${type}</td>
                                     <td>${data.data[i].brand}</td>
                                     <td>${data.data[i].type}</td>
                                     <td>${data.data[i].price}</td>
