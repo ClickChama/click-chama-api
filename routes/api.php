@@ -55,6 +55,10 @@ Route::middleware(['auth.customer.token'])->get('auth/customer/info', [AuthCusto
 Route::middleware(['auth.customer.token'])->delete('auth/customer/delete-address', [AuthCustomerController::class, 'deleteAddress'])->name('auth.customer.deleteAddress');
 Route::middleware(['auth.customer.token'])->post('auth/customer/resend-sms', [AuthCustomerController::class, 'resendSMS'])->name('auth.customer.resendSMS');
 Route::middleware(['auth.customer.token'])->post('auth/customer/receiver-sms', [AuthCustomerController::class, 'receiverSMS'])->name('auth.customer.receiverSMS');
+
+Route::post('adress/store', [AddressController::class, 'store'])->middleware(['auth.customer.token'])->name('adress.store');
+Route::get('adress/get/{id}', [AddressController::class, 'show'])->middleware(['auth.customer.token'])->name('adress.get');
+
 Route::post('auth/customer/send-token-reset-password', [AuthCustomerController::class, 'sendTokenResetPassword'])->name('auth.customer.sendTokenResetPassword');
 Route::post('auth/customer/token-reset-password', [AuthCustomerController::class, 'resetPassword'])->name('auth.customer.resetPassword');
 ################################
