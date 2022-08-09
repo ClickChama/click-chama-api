@@ -21,6 +21,7 @@ class CartController extends Controller
             'quantity' => 1,
             'attributes' => array(
                 'brand'    => $cart['brand'],
+                'seller_id' => $cart['seller_id'],
             ),
 
         ));
