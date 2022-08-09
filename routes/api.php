@@ -65,8 +65,8 @@ Route::post('auth/customer/send-token-reset-password', [AuthCustomerController::
 Route::post('auth/customer/token-reset-password', [AuthCustomerController::class, 'resetPassword'])->name('auth.customer.resetPassword');
 
 Route::post('cart-add', [CartController::class, 'cartAdd']);
-Route::get('cart-get', [CartController::class, 'cartGet']);
-Route::get('cart-clear', [CartController::class, 'cartClear']);
+Route::post('cart-get', [CartController::class, 'getCart']);
+Route::post('cart-clear', [CartController::class, 'cartRemove']);
 
 ################################
 #########################################################

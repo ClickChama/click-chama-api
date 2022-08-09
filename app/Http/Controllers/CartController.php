@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CartItem;
 use Cart;
 use Illuminate\Http\Request;
 
@@ -10,53 +11,33 @@ class CartController extends Controller
     public function cartAdd(Request $request)
     {
 
-        $cart = $request->all();
+        $cartItens = $request->all();
 
-        // dd($cart);
+        foreach ($cartItens as $key => $iten) {
+            $cart = CartItem::create([
+                'customer_id' => $iten['customer_id'],
+                'seller_id' => $iten['seller_id'],
+                'brand' => $iten['brand'],
+                'type' => $iten['type'],
+                'price' => $iten['price'],
+                'product_type' => $iten['product_type'],
+                'quantity' => $iten['quantity'],
+            ]);
+        }
 
-        \Cart::add(array(
-            'id' => $cart['id'],
-            'name' => $cart['name'],
-            'price' => $cart['value'],
-            'quantity' => 1,
-            'attributes' => array(
-                'brand'    => $cart['brand'],
-                'seller_id' => $cart['seller_id'],
-            ),
-
-        ));
-        return response()->json(\Cart::getContent());
+        return response()->json('success', 200);
     }
 
-    public function cartRemove($id)
+    public function getCart(Request $request)
     {
-        \Cart::remove($id);
-        return response()->json(\Cart::getContent());
+        $data = $request->all();
+        $cart = CartItem::where('customer_id', $data['id'])->get();
+        return response()->json($cart);
     }
-
-    public function cartClear()
+    public function cartRemove(Request $request)
     {
-        \Cart::clear();
-
-        return response()->json('success');
-    }
-
-    public function cartGet()
-    {
-        $cartItens = \Cart::getContent();
-        return response()->json($cartItens);
-    }
-
-    public function cartUpdate(Request $request, $id)
-    {
-
-        \Cart::update($id, array(
-            'quantity' => array(
-                'relative' => false,
-                'value' => $request->value,
-            ),
-          ));
-
-          return response()->json(\Cart::getContent());
+        $data = $request->all();
+        $cart = CartItem::where('customer_id', $data['id']);
+        $cart->delete();
     }
 }
