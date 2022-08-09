@@ -12,7 +12,7 @@ class CartController extends Controller
     {
 
         $cartItens = $request->all();
-
+        \Log::info($cartItens);
         foreach ($cartItens as $key => $iten) {
             $cart = CartItem::create([
                 'customer_id' => $iten['customer_id'],
