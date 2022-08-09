@@ -24,7 +24,7 @@ class CartController extends Controller
                 'quantity' => $iten['quantity'],
             ]);
         }
-
+        \Log::info($cart);
         return response()->json('success', 200);
     }
 
