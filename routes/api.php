@@ -7,6 +7,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\AuthSellerController;
 use App\Http\Controllers\Auth\AuthCustomerController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,5 +63,10 @@ Route::get('adress/get/{id}', [AddressController::class, 'show'])->name('adress.
 
 Route::post('auth/customer/send-token-reset-password', [AuthCustomerController::class, 'sendTokenResetPassword'])->name('auth.customer.sendTokenResetPassword');
 Route::post('auth/customer/token-reset-password', [AuthCustomerController::class, 'resetPassword'])->name('auth.customer.resetPassword');
+
+Route::post('cart-add', [CartController::class, 'cartAdd'])->middleware(['auth.seller.token']);
+Route::get('cart-get', [CartController::class, 'cartGet'])->middleware(['auth.seller.token']);
+Route::get('cart-clear', [CartController::class, 'cartClear'])->middleware(['auth.seller.token']);
+
 ################################
 #########################################################
