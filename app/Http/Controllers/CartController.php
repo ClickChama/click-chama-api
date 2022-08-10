@@ -14,19 +14,8 @@ class CartController extends Controller
         $cartItens = collect($request->all());
         \Log::info($cartItens);
         $cart = CartItem::create($cartItens->toArray());
-        // foreach ($cartItens as $key => $iten) {
-        //     $cart = CartItem::create([
-        //         'customer_id' => $iten['customer_id'],
-        //         'seller_id' => $iten['seller_id'],
-        //         'brand' => $iten['brand'],
-        //         'type' => $iten['type'],
-        //         'price' => $iten['price'],
-        //         'product_type' => $iten['product_type'],
-        //         'quantity' => $iten['quantity'],
-        //     ]);
-        // }
         \Log::info($cart);
-        return response()->json('success', 200);
+        return response()->json($cart);
     }
 
     public function getCart(Request $request)
