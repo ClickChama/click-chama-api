@@ -59,7 +59,7 @@ Route::middleware(['auth.customer.token'])->post('auth/customer/resend-sms', [Au
 Route::middleware(['auth.customer.token'])->post('auth/customer/receiver-sms', [AuthCustomerController::class, 'receiverSMS'])->name('auth.customer.receiverSMS');
 
 Route::post('adress/store', [AddressController::class, 'store'])->middleware(['auth.customer.token'])->name('adress.store');
-Route::get('adress/get/{id}', [AddressController::class, 'show'])->name('adress.get');
+Route::post('adress/get', [AddressController::class, 'show'])->name('adress.get');
 
 Route::post('auth/customer/send-token-reset-password', [AuthCustomerController::class, 'sendTokenResetPassword'])->name('auth.customer.sendTokenResetPassword');
 Route::post('auth/customer/token-reset-password', [AuthCustomerController::class, 'resetPassword'])->name('auth.customer.resetPassword');
