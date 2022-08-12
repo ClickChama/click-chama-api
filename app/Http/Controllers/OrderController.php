@@ -11,7 +11,7 @@ class OrderController extends Controller
     public function show(Request $request, $id = null)
     {
         if($id) $orders = Order::find($id);
-        if(!$id) $orders = Order::with('orderProducts', 'seller.info', 'customer', 'customerAddress')->paginate($per_page ?? 20);
+        if(!$id) $orders = Order::with('orderProducts', 'seller.info', 'customer', 'customerAddress')->get();
 
         return response()->json($orders);
     }
