@@ -28,9 +28,10 @@ class OrderController extends Controller
         });
 
         $data = $request->all();
-        $cart = CartItem::where('customer_id', $data['id']);
+        $cart = CartItem::where('customer_id', $data['customer_id']);
         $cart->delete();
 
+        \Log::info($data);
         return response()->json(Order::with('orderProducts')->find($order->id));
     }
 }
