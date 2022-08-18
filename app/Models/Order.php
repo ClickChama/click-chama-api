@@ -16,7 +16,7 @@ class Order extends Model
         'customer_address_id',
         'quantity',
         'total_price',
-        'payment',
+        'payment_method',
         'payback'
     ];
 
