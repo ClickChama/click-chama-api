@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\CartItem;
 use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 
@@ -25,6 +26,10 @@ class OrderController extends Controller
             $product = collect($product)->put('order_id', $order->id);
             OrderProduct::create($product->toArray());
         });
+
+        $data = $request->all();
+        $cart = CartItem::where('customer_id', $data['id']);
+        $cart->delete();
 
         return response()->json(Order::with('orderProducts')->find($order->id));
     }
