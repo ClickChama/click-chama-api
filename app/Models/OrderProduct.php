@@ -15,5 +15,7 @@ class OrderProduct extends Model
         'product_id',
         'quantity',
         'unit_price',
+        'name',
+        'brand',
     ];
 }
