@@ -50,16 +50,16 @@ class AddressController extends Controller
     public function show(Request $request)
     {
         $endereco = [
-            'customer_id' => 'sem endereco',
+            'customer_id' => 'no_id',
             'address' => 'sem endereco',
-            'number' => 'sem endereco',
-            'complement' => 'sem endereco',
-            'district' => 'sem endereco',
-            'city' => 'sem endereco',
-            'state' => 'sem endereco',
-            'zip_code' => 'sem endereco',
-            'created_at' => 'sem endereco',
-            'updated_at' => 'sem endereco',
+            'number' => 'sem numero',
+            'complement' => 'sem complemento',
+            'district' => 'vazio',
+            'city' => 'vazio',
+            'state' => 'vazio',
+            'zip_code' => 'vazio',
+            'created_at' => 'vazio',
+            'updated_at' => 'vazio',
         ];
 
         $data = $request->all();
