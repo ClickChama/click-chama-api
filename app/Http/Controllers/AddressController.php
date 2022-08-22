@@ -49,12 +49,25 @@ class AddressController extends Controller
      */
     public function show(Request $request)
     {
+        $endereco = [
+            'customer_id' => 'sem endereco',
+            'address' => 'sem endereco',
+            'number' => 'sem endereco',
+            'complement' => 'sem endereco',
+            'district' => 'sem endereco',
+            'city' => 'sem endereco',
+            'state' => 'sem endereco',
+            'zip_code' => 'sem endereco',
+            'created_at' => 'sem endereco',
+            'updated_at' => 'sem endereco',
+        ];
+
         $data = $request->all();
         $address = Address::where('customer_id', $data['id'])->first();
         if($address){
             return response()->json($address);
         }else{
-            return 'vazio';
+            return response()->json($endereco);
         }
 
     }
