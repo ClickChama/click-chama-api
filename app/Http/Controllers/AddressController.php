@@ -51,7 +51,12 @@ class AddressController extends Controller
     {
         $data = $request->all();
         $address = Address::where('customer_id', $data['id'])->first();
-        return response()->json($address);
+        if($address){
+            return response()->json($address);
+        }else{
+            return 'vazio';
+        }
+
     }
 
     /**
