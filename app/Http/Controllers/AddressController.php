@@ -14,7 +14,6 @@ class AddressController extends Controller
      */
     public function index()
     {
-
     }
 
     /**
@@ -49,27 +48,11 @@ class AddressController extends Controller
      */
     public function show(Request $request)
     {
-        $endereco = [
-            'customer_id' => 'no_id',
-            'address' => 'sem endereco',
-            'number' => 'sem numero',
-            'complement' => 'sem complemento',
-            'district' => 'vazio',
-            'city' => 'vazio',
-            'state' => 'vazio',
-            'zip_code' => 'vazio',
-            'created_at' => 'vazio',
-            'updated_at' => 'vazio',
-        ];
+
 
         $data = $request->all();
         $address = Address::where('customer_id', $data['id'])->first();
-        if($address){
-            return response()->json($address);
-        }else{
-            return response()->json($endereco);
-        }
-
+        return response()->json($address);
     }
 
     /**
