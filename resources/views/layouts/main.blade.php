@@ -179,7 +179,7 @@
                             if (value.status == 0) {
                                 $('.allpedidos').append(`<div class="row pedido" style="margin-top: 12px;">
                                 <div class="col" data-bs-toggle="modal" data-orderid="${value.id}" data-bs-target="#status" style="margin-bottom: 12px;border-width: 1px;border-style: solid;border-top-color: rgb(33,;border-right-color: 37,;border-bottom-color: 41);border-left-color: 37,;border-radius: 6px;">
-                                    <div style="padding-top: 12px;padding-bottom: 12px;"><span>${value.customer.name} pedido: #${value.id.substring(0,4)}</span></div>
+                                    <div style="padding-top: 12px;padding-bottom: 12px;"><span>${value.customer.name}, pedido: #${value.id.substring(0,4)}</span></div>
                                 </div>
                             </div>`);
 
@@ -187,7 +187,7 @@
                             if (value.status == 1 || value.status == 2) {
                                 $('.peddidos').append(`<div class="row pedido" style="margin-top: 12px;">
                                 <div class="col" data-bs-toggle="modal" data-orderid="${value.id}" data-bs-target="#status" style="margin-bottom: 12px;border-width: 1px;border-style: solid;border-top-color: rgb(33,;border-right-color: 37,;border-bottom-color: 41);border-left-color: 37,;border-radius: 6px;">
-                                    <div style="padding-top: 12px;padding-bottom: 12px;"><span>${value.customer.name}</span></div>
+                                    <div style="padding-top: 12px;padding-bottom: 12px;"><span>${value.customer.name}, pedido: #${value.id.substring(0,4)}</span></div>
                                 </div>
                             </div>`);
 
@@ -195,7 +195,7 @@
                             if (value.status == 3 || value.status == 4) {
                                 $('.concluidos').append(`<div class="row pedido" style="margin-top: 12px;">
                                 <div class="col" data-bs-toggle="modal" data-orderid="${value.id}" data-bs-target="#status" style="margin-bottom: 12px;border-width: 1px;border-style: solid;border-top-color: rgb(33,;border-right-color: 37,;border-bottom-color: 41);border-left-color: 37,;border-radius: 6px;">
-                                    <div style="padding-top: 12px;padding-bottom: 12px;"><span>${value.customer.name}</span></div>
+                                    <div style="padding-top: 12px;padding-bottom: 12px;"><span>${value.customer.name}, pedido: #${value.id.substring(0,4)}</span></div>
                                 </div>
                             </div>`);
 
