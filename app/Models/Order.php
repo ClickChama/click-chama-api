@@ -17,7 +17,8 @@ class Order extends Model
         'quantity',
         'total_price',
         'payment_method',
-        'payback'
+        'payback',
+        'status'
     ];
 
     public function orderProducts()

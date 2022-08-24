@@ -12,9 +12,7 @@ class CartController extends Controller
     {
 
         $cartItens = collect($request->all());
-        \Log::info($cartItens);
         $cart = CartItem::create($cartItens->toArray());
-        \Log::info($cart);
         return response()->json($cart);
     }
 

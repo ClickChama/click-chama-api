@@ -30,8 +30,11 @@ Route::middleware(['auth.seller.token'])->prefix('seller')->group(function(){
     Route::put('product', [ProductController::class, 'update'])->name('product');
     Route::delete('product', [ProductController::class, 'delete'])->name('product');
 
+    Route::get('getorder/{id?}', [OrderController::class, 'getOrderById'])->name('orderBy');
     Route::get('order/{id?}', [OrderController::class, 'show'])->name('order');
+    Route::get('order-status/{id?}', [OrderController::class, 'editStatus'])->name('orderstatus');
     Route::post('order', [OrderController::class, 'create'])->name('order');
+    Route::put('status-change', [OrderController::class, 'editStatusStore'])->name('statuschange');
 });
 
 Route::middleware(['auth.customer.token'])->prefix('customer')->group(function(){

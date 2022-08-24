@@ -17,6 +17,27 @@ class OrderController extends Controller
         return response()->json($orders);
     }
 
+    public function getOrderById($id)
+    {
+        $orders = Order::where('seller_id', $id)->with('orderProducts', 'seller.info', 'customer', 'customerAddress')->get();
+
+        return response()->json($orders);
+    }
+
+    public function editStatus($id)
+    {
+        $orders = Order::with('orderProducts', 'seller.info', 'customer', 'customerAddress')->find($id);
+        return response()->json($orders);
+    }
+
+    public function editStatusStore(Request $request)
+    {
+        $dataProduct = collect($request->all());
+        $order = Order::find($request->id)->update($dataProduct->toArray());
+
+        return response()->json($order);
+    }
+
     public function create(Request $request)
     {
         $dataOrder = collect($request->all())->forget('products');

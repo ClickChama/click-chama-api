@@ -16,21 +16,33 @@
     <header style="background: #4e0189;color: #ffffff;">
         <div class="container">
             <nav class="navbar navbar-light navbar-expand-md">
-                <div class="container-fluid"><a class="navbar-brand" href="{{asset('/')}}" style="color: #000000;background: #ffffff;font-weight: bold;border-width: 1px;border-style: solid;border-radius: 10px;padding: 4px 6px;">DRAGON-GAS</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon" style="color: #ffffff;"></span></button>
+                <div class="container-fluid"><a class="navbar-brand" href="{{ asset('/') }}"
+                        style="color: #000000;background: #ffffff;font-weight: bold;border-width: 1px;border-style: solid;border-radius: 10px;padding: 4px 6px;">DRAGON-GAS</a><button
+                        data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span
+                            class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"
+                            style="color: #ffffff;"></span></button>
                     <div class="collapse navbar-collapse" id="navcol-1">
                         <ul class="navbar-nav">
-                            <li class="nav-item"><a class="nav-link active" href="{{asset('/')}}" style="color: #ffffff;">Pedidos</a></li>
-                            <li class="nav-item"><a class="nav-link active" href="{{asset('produto')}}" style="color: #ffffff;">Produtos</a></li>
-                            <li class="nav-item"><a class="nav-link active" href="{{asset('relatorio')}}" style="color: #ffffff;">Relatorios</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="{{ asset('/') }}"
+                                    style="color: #ffffff;">Pedidos</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="{{ asset('produto') }}"
+                                    style="color: #ffffff;">Produtos</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="{{ asset('relatorio') }}"
+                                    style="color: #ffffff;">Relatorios</a></li>
                         </ul>
                         <ul class="navbar-nav ms-auto">
-                            <li class="nav-item" style="margin: 0px 6px 0px 0px;"><a class="nav-link active" href="#"><i class="fa fa-bell" style="color: #ffffff;font-size: 22px;"></i></a></li>
+                            <li class="nav-item" style="margin: 0px 6px 0px 0px;"><a class="nav-link active"
+                                    href="#"><i class="fa fa-bell"
+                                        style="color: #ffffff;font-size: 22px;"></i></a></li>
                             <li class="nav-item"><label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
                                 </label>
                             </li>
-                            <li class="nav-item" style="margin: 0px 0px 0px 8px;"><a class="nav-link active" href="{{asset('perfil')}}" style="background: #ffffff;border-radius: 50%;padding: 4px 8px;margin: 0px 0px 0px 0px;"><i class="fa fa-user" style="color: #4e0189;font-size: 22px;"></i></a></li>
+                            <li class="nav-item" style="margin: 0px 0px 0px 8px;"><a class="nav-link active"
+                                    href="{{ asset('perfil') }}"
+                                    style="background: #ffffff;border-radius: 50%;padding: 4px 8px;margin: 0px 0px 0px 0px;"><i
+                                        class="fa fa-user" style="color: #4e0189;font-size: 22px;"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -44,45 +56,44 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             var type;
-            $(function(){
-                if(!localStorage.getItem('session')) window.location.href = '/login';
+
+            function alertaRetorno(data) {
+                sellerId = data.id
+
+                getOrder(sellerId);
+
+            }
+            $(function() {
+                if (!localStorage.getItem('session')) window.location.href = '/login';
 
                 $.ajax({
-                    url: `{{route('auth.seller.info')}}`,
+                    url: `{{ route('auth.seller.info') }}`,
                     headers: {
-                        'Authorization': 'Bearer '+localStorage.getItem('session'),
+                        'Authorization': 'Bearer ' + localStorage.getItem('session'),
                     },
                     type: 'GET',
                     success: (data) => {
-                        // console.log(data);
-                        for(i in data){
-                            $(`.perfil [name="${i}"]`).val(data[i]);
-                            if(i == 'info' && data[i]){
-                                var info = data[i];
-                                for(j in info){
-                                    $(`.perfil [name="${j}"]`).val(info[j]);
-                                }
-                            }
-                        }
+                        // console.log(data.id);
+                        alertaRetorno(data);
+
                     }
                 });
 
                 $.ajax({
-                    url: `{{route('product')}}`,
+                    url: `{{ route('product') }}`,
                     headers: {
-                        'Authorization': 'Bearer '+localStorage.getItem('session'),
+                        'Authorization': 'Bearer ' + localStorage.getItem('session'),
                     },
                     type: 'GET',
                     success: (data) => {
                         // console.log(data);
                         $('.table-produto').empty();
-                        for(i in data.data){
-                            if(data.data[i].product_type == 1)
-                            {
+                        for (i in data.data) {
+                            if (data.data[i].product_type == 1) {
                                 type = 'Gás';
-                            }else if(data.data[i].product_type == 2){
+                            } else if (data.data[i].product_type == 2) {
                                 type = 'Aguá';
                             }
                             $('.table-produto').append(`
@@ -94,52 +105,57 @@
                                     <td><div class="btn-group" role="group"><button class="btn btn-info" type="button" data-id="${data.data[i].id}" data-bs-target="#editar-produto" data-bs-toggle="modal">Editar</button><button class="btn btn-danger btn-apagar-product" data-id="${data.data[i].id}" type="button">Apagar</button></div></td>
                                 </tr>
                             `);
-                            console.log(data.data[i]);
+
                         }
                     }
                 });
             });
 
-            $(document).on('click', '[data-bs-target="#editar-produto"]', function(){
+            $(document).on('click', '[data-bs-target="#editar-produto"]', function() {
                 $.ajax({
-                    url: `{{route('product')}}/${$(this).data('id')}`,
+                    url: `{{ route('product') }}/${$(this).data('id')}`,
                     headers: {
-                        'Authorization': 'Bearer '+localStorage.getItem('session'),
+                        'Authorization': 'Bearer ' + localStorage.getItem('session'),
                     },
                     type: 'GET',
                     success: (data) => {
-                        for(i in data){
+                        for (i in data) {
                             $('#editar-produto').find(`[name="${i}"]`).val(data[i]);
                         }
                     }
                 });
             });
 
-            $(document).on('click', '.btn-apagar-product', function(){
+            $(document).on('click', '.btn-apagar-product', function() {
                 $.ajax({
-                    url: `{{route('product')}}`,
+                    url: `{{ route('product') }}`,
                     headers: {
-                        'Authorization': 'Bearer '+localStorage.getItem('session'),
+                        'Authorization': 'Bearer ' + localStorage.getItem('session'),
                     },
                     type: 'DELETE',
-                    data: {products_id: [$(this).data('id')]},
+                    data: {
+                        products_id: [$(this).data('id')]
+                    },
                     success: (data) => {
                         window.location.reload();
                     }
                 });
             });
 
-            $(document).on('click', '.btn-send', function(){
+            $(document).on('click', '.btn-send', function() {
                 var btn = $(this);
                 var btn_text = btn.html();
-                btn.html(`<div class="spinner-border text-dark" role="status"><span class="visually-hidden">Loading...</span></div>`);
+                btn.html(
+                    `<div class="spinner-border text-dark" role="status"><span class="visually-hidden">Loading...</span></div>`
+                );
 
                 $.ajax({
                     url: btn.closest('form').attr('action'),
                     headers: {
-                        'Authorization': 'Bearer '+localStorage.getItem('session'),
+                        'Authorization': 'Bearer ' + localStorage.getItem('session'),
                     },
-                    type: (btn.closest('form').attr('method') ? btn.closest('form').attr('method') : 'POST'),
+                    type: (btn.closest('form').attr('method') ? btn.closest('form').attr('method') :
+                        'POST'),
                     data: btn.closest('form').serialize(),
                     success: (data) => {
                         console.log(data);
@@ -148,6 +164,86 @@
                     }
                 });
             });
+
+            function getOrder(sellerId) {
+                $.ajax({
+                    url: `{{ route('orderBy') }}/${sellerId}`,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('session'),
+                    },
+                    type: 'GET',
+                    success: (data) => {
+                        // $('.pedido').empty();
+                        $.each(data, (key, value) => {
+                            console.log(value.id);
+                            if (value.status == 0) {
+                                $('.allpedidos').append(`<div class="row pedido" style="margin-top: 12px;">
+                                <div class="col" data-bs-toggle="modal" data-orderid="${value.id}" data-bs-target="#status" style="margin-bottom: 12px;border-width: 1px;border-style: solid;border-top-color: rgb(33,;border-right-color: 37,;border-bottom-color: 41);border-left-color: 37,;border-radius: 6px;">
+                                    <div style="padding-top: 12px;padding-bottom: 12px;"><span>${value.customer.name}</span></div>
+                                </div>
+                            </div>`);
+
+                            }
+                            if (value.status == 1 || value.status == 2) {
+                                $('.peddidos').append(`<div class="row pedido" style="margin-top: 12px;">
+                                <div class="col" data-bs-toggle="modal" data-orderid="${value.id}" data-bs-target="#status" style="margin-bottom: 12px;border-width: 1px;border-style: solid;border-top-color: rgb(33,;border-right-color: 37,;border-bottom-color: 41);border-left-color: 37,;border-radius: 6px;">
+                                    <div style="padding-top: 12px;padding-bottom: 12px;"><span>${value.customer.name}</span></div>
+                                </div>
+                            </div>`);
+
+                            }
+                            if (value.status == 3 || value.status == 4) {
+                                $('.concluidos').append(`<div class="row pedido" style="margin-top: 12px;">
+                                <div class="col" data-bs-toggle="modal" data-orderid="${value.id}" data-bs-target="#status" style="margin-bottom: 12px;border-width: 1px;border-style: solid;border-top-color: rgb(33,;border-right-color: 37,;border-bottom-color: 41);border-left-color: 37,;border-radius: 6px;">
+                                    <div style="padding-top: 12px;padding-bottom: 12px;"><span>${value.customer.name}</span></div>
+                                </div>
+                            </div>`);
+
+                            }
+
+                        });
+                    }
+                });
+            }
+            $(document).on('click', '[data-bs-target="#status"]',
+                function() {
+                    console.log($(this).data('orderid'));
+                    // $('#statusChange').empty();
+                    $.ajax({
+                        url: `{{ route('orderstatus') }}/${$(this).data('orderid')}`,
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('session'),
+                        },
+                        type: 'GET',
+                        success: (data) => {
+                            $('#statusId').val(data.id);
+
+                        }
+                    });
+                });
+            $(document).on('click', '.btn-enviar', function() {
+                var btn = $(this);
+                var btn_text = btn.html();
+                btn.html(
+                    `<div class="spinner-border text-dark" role="status"><span class="visually-hidden">Loading...</span></div>`
+                );
+
+                $.ajax({
+                    url: $('#form-send').attr('action'),
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('session'),
+                    },
+                    type: $('#form-send').attr('method'),
+                    data: $('#form-send').serialize(),
+                    success: (data) => {
+                        console.log(data);
+                        btn.html(btn_text);
+                        window.location.reload();
+                    }
+                });
+            });
+
+
         });
     </script>
 </body>
