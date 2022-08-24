@@ -20,9 +20,9 @@ class CartController extends Controller
     {
         $data = $request->all();
         $cart = CartItem::where('customer_id', $data['id'])->get();
-
-        return response()->json($cart);
         \Log::info($cart);
+        return response()->json($cart);
+
     }
     public function cartRemove(Request $request)
     {

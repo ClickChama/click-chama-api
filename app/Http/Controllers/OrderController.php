@@ -11,16 +11,17 @@ class OrderController extends Controller
 {
     public function show(Request $request, $id = null)
     {
-        if($id) $orders = Order::with('orderProducts', 'seller.info', 'customer', 'customerAddress')->find($id);
-        if(!$id) $orders = Order::with('orderProducts', 'seller.info', 'customer', 'customerAddress')->get();
+        if ($id) $orders = Order::with('orderProducts', 'seller.info', 'customer', 'customerAddress')->find($id);
+        if (!$id) $orders = Order::with('orderProducts', 'seller.info', 'customer', 'customerAddress')->get();
 
+        \Log::info($orders);
         return response()->json($orders);
     }
 
     public function getOrderById($id)
     {
         $orders = Order::where('seller_id', $id)->with('orderProducts', 'seller.info', 'customer', 'customerAddress')->get();
-
+        \Log::info($orders);
         return response()->json($orders);
     }
 
