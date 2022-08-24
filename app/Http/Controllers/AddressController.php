@@ -52,6 +52,7 @@ class AddressController extends Controller
 
         $data = $request->all();
         $address = Address::where('customer_id', $data['id'])->orderBy('created_at', 'desc')->first();
+        \Log::info($address);
         return response()->json($address);
     }
 

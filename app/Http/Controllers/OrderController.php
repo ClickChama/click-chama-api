@@ -13,15 +13,12 @@ class OrderController extends Controller
     {
         if ($id) $orders = Order::with('orderProducts', 'seller.info', 'customer', 'customerAddress')->find($id);
         if (!$id) $orders = Order::with('orderProducts', 'seller.info', 'customer', 'customerAddress')->get();
-
-        \Log::info($orders);
         return response()->json($orders);
     }
 
     public function getCustomerOrderId($id)
     {
         $orders = Order::where('customer_id', $id)->with('orderProducts', 'seller.info', 'customer', 'customerAddress')->get();
-        \Log::info($orders);
         return response()->json($orders);
     }
 
