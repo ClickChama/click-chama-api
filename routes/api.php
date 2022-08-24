@@ -40,6 +40,7 @@ Route::middleware(['auth.seller.token'])->prefix('seller')->group(function(){
 Route::middleware(['auth.customer.token'])->prefix('customer')->group(function(){
     Route::get('order/{id?}', [OrderController::class, 'show'])->name('customer.order');
     Route::post('order', [OrderController::class, 'create'])->name('customer.order');
+    Route::get('getordercustomer/{id?}', [OrderController::class, 'getCustomerOrderId'])->name('orderByCustomer');
 });
 
 Route::get('get-seller-products', [ProductController::class, 'getSellerProducts'])->name('getSellerProducts');

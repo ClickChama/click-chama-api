@@ -18,6 +18,13 @@ class OrderController extends Controller
         return response()->json($orders);
     }
 
+    public function getCustomerOrderId($id)
+    {
+        $orders = Order::where('customer_id', $id)->with('orderProducts', 'seller.info', 'customer', 'customerAddress')->get();
+        \Log::info($orders);
+        return response()->json($orders);
+    }
+
     public function getOrderById($id)
     {
         $orders = Order::where('seller_id', $id)->with('orderProducts', 'seller.info', 'customer', 'customerAddress')->get();
