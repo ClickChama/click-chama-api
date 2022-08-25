@@ -19,7 +19,8 @@ class OrderController extends Controller
     public function getCustomerOrderId($id)
     {
         $orders = Order::where('customer_id', $id)->with('orderProducts', 'seller.info', 'customer', 'customerAddress')->get();
-        return response()->json($orders);
+        return response()->json($orders, 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
+        JSON_UNESCAPED_UNICODE);
     }
 
     public function getOrderById($id)
