@@ -41,7 +41,7 @@ class ProductController extends Controller
 
     public function getSellerProducts(Request $request)
     {
-        $seller_products = Seller::with('products', 'info')->get()->makeHidden(['email', 'created_at', 'updated_at', 'email_verified_at', 'phone_verified_at']);
+        $seller_products = Seller::where('service_active', 'S')->with('products', 'info')->get()->makeHidden(['email', 'created_at', 'updated_at', 'email_verified_at', 'phone_verified_at']);
 
         return response()->json($seller_products);
     }
