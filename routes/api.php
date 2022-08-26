@@ -35,6 +35,9 @@ Route::middleware(['auth.seller.token'])->prefix('seller')->group(function(){
     Route::get('order-status/{id?}', [OrderController::class, 'editStatus'])->name('orderstatus');
     Route::post('order', [OrderController::class, 'create'])->name('order');
     Route::put('status-change', [OrderController::class, 'editStatusStore'])->name('statuschange');
+
+    Route::get('address-get-cep', [AddressController::class, 'buscaCep'])->name('buscacep');
+
 });
 
 Route::middleware(['auth.customer.token'])->prefix('customer')->group(function(){

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class AddressController extends Controller
 {
@@ -14,6 +15,15 @@ class AddressController extends Controller
      */
     public function index()
     {
+    }
+
+    public function buscaCep(Request $request)
+    {
+
+     
+        $url = Http::get('https://cep.awesomeapi.com.br/json/'.$request->zip_code);
+        $dados = json_decode($url->body());
+        return response()->json($dados);
     }
 
     /**

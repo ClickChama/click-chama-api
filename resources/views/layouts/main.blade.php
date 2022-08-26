@@ -75,7 +75,17 @@
                     },
                     type: 'GET',
                     success: (data) => {
-                        // console.log(data.id);
+                        // console.log(data.info);
+                        for (i in data) {
+
+                            $('#editar-user').find(`[name="${i}"]`).val(data[i]);
+
+                        }
+                        for (i in data.info) {
+
+                            $('#edit-app').find(`[name="${i}"]`).val(data.info[i]);
+                        }
+
                         alertaRetorno(data);
 
                     }
@@ -110,7 +120,28 @@
                     }
                 });
             });
+            $(document).on('change', '#cep', function() {
+                $.ajax({
+                    url: `{{ route('buscacep') }}`,
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('session'),
+                    },
+                    type: 'GET',
+                    data: {
+                        zip_code: $('#cep').val(),
+                    },
+                    success: (data) => {
+                        console.log(data);
+                        $('#address').val(data.address);
+                        $('#city').val(data.city);
+                        $('#district').val(data.district);
+                        $('#state').val(data.state);
+                        $('#lat').val(data.lat);
+                        $('#lng').val(data.lng);
+                    }
+                });
 
+            });
             $(document).on('click', '[data-bs-target="#editar-produto"]', function() {
                 $.ajax({
                     url: `{{ route('product') }}/${$(this).data('id')}`,
