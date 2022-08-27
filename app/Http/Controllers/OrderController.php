@@ -19,15 +19,21 @@ class OrderController extends Controller
     public function getCustomerOrderId($id)
     {
         $orders = Order::where('customer_id', $id)->with('orderProducts', 'seller.info', 'customer', 'customerAddress')->get();
-        return response()->json($orders, 200, ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
-        JSON_UNESCAPED_UNICODE);
+        return response()->json(
+            $orders,
+            200,
+            ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
+            JSON_UNESCAPED_UNICODE
+        );
     }
 
     public function getOrderById($id)
     {
         $orders = Order::where('seller_id', $id)->with('orderProducts', 'seller.info', 'customer', 'customerAddress')->get();
-        \Log::info($orders);
-        return response()->json($orders);
+        $ordersCount = Order::where('seller_id', $id)->where('status', 0)->with('orderProducts', 'seller.info', 'customer', 'customerAddress')->count();
+        $ordersCount2 = Order::where('seller_id', $id)->where('status', 1)->orWhere('status', 2)->with('orderProducts', 'seller.info', 'customer', 'customerAddress')->count();
+        $ordersCount3 = Order::where('seller_id', $id)->where('status', 3)->with('orderProducts', 'seller.info', 'customer', 'customerAddress')->count();
+        return response()->json([$orders, $ordersCount, $ordersCount2, $ordersCount3]);
     }
 
     public function editStatus($id)

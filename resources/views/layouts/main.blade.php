@@ -35,7 +35,7 @@
                                     href="#"><i class="fa fa-bell"
                                         style="color: #ffffff;font-size: 22px;"></i></a></li>
                             <li class="nav-item"><label class="switch">
-                                    <input type="checkbox">
+                                    <input name="change" id="change" type="checkbox" checked>
                                     <span class="slider round"></span>
                                 </label>
                             </li>
@@ -204,33 +204,47 @@
                     },
                     type: 'GET',
                     success: (data) => {
-                        // $('.pedido').empty();
-                        $.each(data, (key, value) => {
-                            console.log(value.id);
+                        console.log(data[2])
+                        $.each(data[0], (key, value) => {
                             if (value.status == 0) {
+
                                 $('.allpedidos').append(`<div class="row pedido" style="margin-top: 12px;">
                                 <div class="col" data-bs-toggle="modal" data-orderid="${value.id}" data-bs-target="#status" style="margin-bottom: 12px;border-width: 1px;border-style: solid;border-top-color: rgb(33,;border-right-color: 37,;border-bottom-color: 41);border-left-color: 37,;border-radius: 6px;">
                                     <div style="padding-top: 12px;padding-bottom: 12px;"><span>${value.customer.name}, pedido: #${value.id.substring(0,4)}</span></div>
                                 </div>
                             </div>`);
+                                $('#total').html(`<div class="text-white bg-success d-flex justify-content-center align-items-center"
+                                        style="width: 38px;height: 38px;padding: 2px;border-radius: 20px;"><span id="">${data[1]}</span>
+                                    </div>`);
 
-                            }
+                            };
                             if (value.status == 1 || value.status == 2) {
                                 $('.peddidos').append(`<div class="row pedido" style="margin-top: 12px;">
                                 <div class="col" data-bs-toggle="modal" data-orderid="${value.id}" data-bs-target="#status" style="margin-bottom: 12px;border-width: 1px;border-style: solid;border-top-color: rgb(33,;border-right-color: 37,;border-bottom-color: 41);border-left-color: 37,;border-radius: 6px;">
                                     <div style="padding-top: 12px;padding-bottom: 12px;"><span>${value.customer.name}, pedido: #${value.id.substring(0,4)}</span></div>
                                 </div>
                             </div>`);
+                                $('#total-andamento').html(`<div class="text-white bg-success d-flex justify-content-center align-items-center"
+                                        style="width: 38px;height: 38px;padding: 2px;border-radius: 20px;"><span id="">${data[2]}</span>
+                                    </div>`);
 
-                            }
+                            };
+
+
+
                             if (value.status == 3 || value.status == 4) {
                                 $('.concluidos').append(`<div class="row pedido" style="margin-top: 12px;">
                                 <div class="col" data-bs-toggle="modal" data-orderid="${value.id}" data-bs-target="#status" style="margin-bottom: 12px;border-width: 1px;border-style: solid;border-top-color: rgb(33,;border-right-color: 37,;border-bottom-color: 41);border-left-color: 37,;border-radius: 6px;">
                                     <div style="padding-top: 12px;padding-bottom: 12px;"><span>${value.customer.name}, pedido: #${value.id.substring(0,4)}</span></div>
                                 </div>
                             </div>`);
+                                $('#total-concluido').html(`<div class="text-white bg-success d-flex justify-content-center align-items-center"
+                                        style="width: 38px;height: 38px;padding: 2px;border-radius: 20px;"><span id="">${data[3]}</span>
+                                    </div>`);
 
-                            }
+
+
+                            };
 
                         });
                     }

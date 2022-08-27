@@ -9,7 +9,7 @@
                         <h4 class="card-title">Novos Pedidos</h4>
                         <div class="container allpedidos" style="margin: 10px 0px;">
                             <div class="row justify-content-between">
-                                <div class="col-12 text-start" style="padding: 6px 12px;">
+                                <div class="col-12 text-start" id="total" style="padding: 6px 12px;">
                                     <div class="text-white bg-success d-flex justify-content-center align-items-center"
                                         style="width: 38px;height: 38px;padding: 2px;border-radius: 20px;"><span>0</span>
                                     </div>
@@ -31,7 +31,7 @@
                         <h4 class="card-title">Em Andamento</h4>
                         <div class="container peddidos" style="margin: 10px 0px;">
                             <div class="row justify-content-between">
-                                <div class="col-12 text-start" style="padding: 6px 12px;">
+                                <div class="col-12 text-start" id="total-andamento" style="padding: 6px 12px;">
                                     <div class="text-white bg-success d-flex justify-content-center align-items-center"
                                         style="width: 38px;height: 38px;padding: 2px;border-radius: 20px;"><span>0</span>
                                     </div>
@@ -52,13 +52,13 @@
                         <h4 class="card-title">Conluídos</h4>
                         <div class="container concluidos" style="margin: 10px 0px;">
                             <div class="row justify-content-between">
-                                <div class="col-12 text-start" style="padding: 6px 12px;">
+                                <div class="col-12 text-start" id="total-concluido" style="padding: 6px 12px;">
                                     <div class="text-white bg-success d-flex justify-content-center align-items-center"
                                         style="width: 38px;height: 38px;padding: 2px;border-radius: 20px;"><span>0</span>
                                     </div>
                                 </div>
                             </div>
-                      
+
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                     <div class="modal-body">
                         <select class="form-select" id="statusChange" name="status" aria-label="Default select example">
                             <option value="1">Aceitar</option>
-                            <option value="2" >Entrega</option>
+                            <option value="2">Entrega</option>
                             <option value="3">Produto Entregue</option>
                             <option value="4">Cancelar</option>
                         </select>
